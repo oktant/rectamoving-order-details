@@ -129,7 +129,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
@@ -138,7 +138,7 @@
                     <fork>true</fork>
                     <executable>C:\Program Files\Java\jdk1.8.0_181\bin\javac</executable>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
