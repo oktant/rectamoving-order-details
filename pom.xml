@@ -139,14 +139,14 @@
                     <executable>C:\Program Files\Java\jdk1.8.0_181\bin\javac</executable>
                 </configuration>
             </plugin>-->
-            <plugin>
+            <!--<plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.9</version>
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>

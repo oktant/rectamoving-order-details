@@ -27,12 +27,12 @@ public class BookingController {
         return "Hello"+p.getName();
     }
 
-    @PostMapping("/vehicleCategoriesByDistance")
+    @PostMapping("/vehicles/categories/distances")
     public ResponseEntity<VehicleCategory> getVehicleCategoryByDistance(@RequestBody BookingDetail bookingDetail, Principal principal){
         ResponseEntity<VehicleCategory> result = vehicleCategoryService.getVehicleCategoryByDistance(bookingDetail,principal.getName());
         return result;
     }
-    @GetMapping("/vehicleCategoriesByPayload/{payload}")
+    @GetMapping("/vehicle/categories/payload/{payload}")
     public ResponseEntity<VehicleCategory> getVehicleCategoryByPayload(@PathVariable double payload, Principal principal){
         ResponseEntity<VehicleCategory> result = vehicleCategoryService.getVehicleCategoryByPayload(principal.getName(),payload);
         return result;
@@ -44,16 +44,17 @@ public class BookingController {
         return new ResponseEntity<>(book,HttpStatus.OK);
     }
 
-    @PostMapping("/customerDetails")
+    @PostMapping("/customers/details")
     public ResponseEntity setCustomerDetails(@RequestBody CustomerDetail customerDetail,Principal principal){
         return bookingService.setCustomerDetails(customerDetail,principal.getName());
     }
 
-    @PostMapping("/bookingDetails")
+    @PostMapping("/details")
     public  ResponseEntity setBookingDetail(Principal principal){
         return bookingService.booking(principal.getName());
     }
-    @GetMapping("/bookingDetais")
+
+    @GetMapping("/details")
     public  ResponseEntity<BookingDetail> getBookingDetail(Principal principal){
         return bookingService.getBookingDetail(principal.getName());
     }
