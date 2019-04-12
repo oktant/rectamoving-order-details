@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-public class BookingApplication {
+public class OrderDetailsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BookingApplication.class, args);
+        SpringApplication.run(OrderDetailsApplication.class, args);
     }
 
 }
