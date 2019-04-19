@@ -5,7 +5,7 @@ services:
 variables:
   DOCKER_DRIVER: overlay
   SPRING_PROFILES_ACTIVE: gitlab-ci
-  IMAGE_TAG: oktayalizada/nosy-admin:latest
+
 stages:
   - build
   - package
@@ -22,6 +22,6 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t $IMAGE_TAG .
-  - docker login -u $CI_REGISTRY_USERNAME -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  - docker push $IMAGE_TAG
+  - docker build -t git.rectasolutions.com:9988/rectamoving/order-detatils .
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.rectasolutions.com:9988
+  - docker push git.rectasolutions.com:9988/rectamoving/order-detatils 
