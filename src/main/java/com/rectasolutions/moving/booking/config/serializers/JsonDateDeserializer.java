@@ -1,15 +1,12 @@
 package com.rectasolutions.moving.booking.config.serializers;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.node.TextNode;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class JsonDateDeserializer extends StdDeserializer<LocalDateTime> {
 
