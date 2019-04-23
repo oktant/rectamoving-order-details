@@ -17,28 +17,28 @@ public class VehicleCategoryService {
     @Autowired
     private VehicleApi vehicleApi;
 
-    public ResponseEntity<VehicleCategory> getVehicleCategoryByDistance(BookingDetail bookingDetail,String username){
+    public ResponseEntity<VehicleCategory> getVehicleCategoryByDistance(BookingDetail bookingDetail, String username) {
 
         VehicleCategory vehicleCategory = vehicleApi.getVehicleCategoryByDistance(bookingDetail.getDistance());
-        return getVehicleResponse(vehicleCategory,bookingDetail,username);
+        return getVehicleResponse(vehicleCategory, bookingDetail, username);
     }
 
-    public ResponseEntity<VehicleCategory> getVehicleCategoryByPayload(String username, double payload){
+    public ResponseEntity<VehicleCategory> getVehicleCategoryByPayload(String username, double payload) {
 
-        BookingDetail bookingDetail = redisService.get(username,Services.Booking);
-        VehicleCategory vehicleCategory = vehicleApi.getVehicleCategoryByPayload(bookingDetail.getDistance(),payload);
-        return getVehicleResponse(vehicleCategory,bookingDetail,username);
+        BookingDetail bookingDetail = redisService.get(username, Services.BOOKING);
+        VehicleCategory vehicleCategory = vehicleApi.getVehicleCategoryByPayload(bookingDetail.getDistance(), payload);
+        return getVehicleResponse(vehicleCategory, bookingDetail, username);
 
     }
 
-    private ResponseEntity<VehicleCategory> getVehicleResponse(VehicleCategory vehicleCategory,BookingDetail bookingDetail,String username){
+    private ResponseEntity<VehicleCategory> getVehicleResponse(VehicleCategory vehicleCategory, BookingDetail bookingDetail, String username) {
 
-        if (vehicleCategory==null)
+        if (vehicleCategory == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        else{
-            ResponseEntity<VehicleCategory> response = new ResponseEntity<>(vehicleCategory,HttpStatus.OK);
+        else {
+            ResponseEntity<VehicleCategory> response = new ResponseEntity<>(vehicleCategory, HttpStatus.OK);
             bookingDetail.setVehicleCategory(response.getBody());
-            redisService.save(username, bookingDetail, Services.Booking);
+            redisService.save(username, bookingDetail, Services.BOOKING);
             return response;
         }
     }

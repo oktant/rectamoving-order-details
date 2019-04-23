@@ -25,55 +25,59 @@ public class BookingService {
     @Autowired
     private LocationRepository locationRepository;
 
-    public BookingDetail setMainInfo(BookingDetail bookingDetail,String username){
-        BookingDetail book = redisService.get(username,Services.Booking);
+    public BookingDetail setMainInfo(BookingDetail bookingDetail, String username) {
+        BookingDetail book = redisService.get(username, Services.BOOKING);
         book.setDeliveryTime(bookingDetail.getDeliveryTime());
         book.setVolume(bookingDetail.getVolume());
         book.setGoodDescriptions(bookingDetail.getGoodDescriptions());
         book.setPrice(calculatePrice(bookingDetail));
-        redisService.save(username,book,Services.Booking);
+        redisService.save(username, book, Services.BOOKING);
         return book;
     }
-    private String calculatePrice(BookingDetail bookingDetail){
+
+    private String calculatePrice(BookingDetail bookingDetail) {
         //todo
         return "";
     }
-    public ResponseEntity setCustomerDetails(CustomerDetail customerDetail, String username){
-        try{
-            BookingDetail book = redisService.get(username,Services.Booking);
+
+    public ResponseEntity setCustomerDetails(CustomerDetail customerDetail, String username) {
+        try {
+            BookingDetail book = redisService.get(username, Services.BOOKING);
             book.setCustomerDetail(customerDetail);
-            redisService.save(username,book,Services.Booking);
+            redisService.save(username, book, Services.BOOKING);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception exp){
-            return  new ResponseEntity(HttpStatus.BAD_REQUEST);
+        } catch (Exception exp) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
-    public ResponseEntity booking(String username){
+
+    public ResponseEntity booking(String username) {
         try {
-            BookingDetail book = redisService.get(username,Services.Booking);
+            BookingDetail book = redisService.get(username, Services.BOOKING);
             saveInDb(book);
 
-            redisService.invalidate(username,Services.Booking);
+            redisService.invalidate(username, Services.BOOKING);
 
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception exp){
-            return  new ResponseEntity(HttpStatus.BAD_REQUEST);
+        } catch (Exception exp) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
     }
-    private void saveInDb(BookingDetail book){
+
+    private void saveInDb(BookingDetail book) {
         locationRepository.save(book.getPickUp());
         locationRepository.save(book.getDropTo());
         customerDetailRepository.save(book.getCustomerDetail());
         bookingDetailRepository.save(book);
     }
 
-    public ResponseEntity<BookingDetail> getBookingDetail(String username){
+    public ResponseEntity<BookingDetail> getBookingDetail(String username) {
         try {
-            BookingDetail book = redisService.get(username,Services.Booking);
-            return new ResponseEntity(book,HttpStatus.OK);
-        }catch (Exception exp){
-            return  new ResponseEntity(HttpStatus.BAD_REQUEST);
+            BookingDetail book = redisService.get(username, Services.BOOKING);
+            return new ResponseEntity(book, HttpStatus.OK);
+        } catch (Exception exp) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 

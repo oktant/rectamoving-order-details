@@ -23,39 +23,39 @@ public class BookingController {
 
     //FOR SIGN IN KEYCLOAK
     @GetMapping
-    public String helloWorld(String text,Principal p){
-        return "Hello"+p.getName();
+    public String helloWorld(String text, Principal p) {
+        return "Hello" + p.getName();
     }
 
     @PostMapping("/vehicles/categories/distances")
-    public ResponseEntity<VehicleCategory> getVehicleCategoryByDistance(@RequestBody BookingDetail bookingDetail, Principal principal){
-        ResponseEntity<VehicleCategory> result = vehicleCategoryService.getVehicleCategoryByDistance(bookingDetail,principal.getName());
-        return result;
+    public ResponseEntity<VehicleCategory> getVehicleCategoryByDistance(@RequestBody BookingDetail bookingDetail, Principal principal) {
+        return vehicleCategoryService.getVehicleCategoryByDistance(bookingDetail, principal.getName());
+
     }
+
     @GetMapping("/vehicle/categories/payload/{payload}")
-    public ResponseEntity<VehicleCategory> getVehicleCategoryByPayload(@PathVariable double payload, Principal principal){
-        ResponseEntity<VehicleCategory> result = vehicleCategoryService.getVehicleCategoryByPayload(principal.getName(),payload);
-        return result;
+    public ResponseEntity<VehicleCategory> getVehicleCategoryByPayload(@PathVariable double payload, Principal principal) {
+        return vehicleCategoryService.getVehicleCategoryByPayload(principal.getName(), payload);
     }
 
     @PostMapping("/price")
-    public ResponseEntity<BookingDetail> calculatePrice(@RequestBody BookingDetail bookingDetail,Principal principal){
-        BookingDetail book = bookingService.setMainInfo(bookingDetail,principal.getName());
-        return new ResponseEntity<>(book,HttpStatus.OK);
+    public ResponseEntity<BookingDetail> calculatePrice(@RequestBody BookingDetail bookingDetail, Principal principal) {
+        BookingDetail book = bookingService.setMainInfo(bookingDetail, principal.getName());
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     @PostMapping("/customers/details")
-    public ResponseEntity setCustomerDetails(@RequestBody CustomerDetail customerDetail,Principal principal){
-        return bookingService.setCustomerDetails(customerDetail,principal.getName());
+    public ResponseEntity setCustomerDetails(@RequestBody CustomerDetail customerDetail, Principal principal) {
+        return bookingService.setCustomerDetails(customerDetail, principal.getName());
     }
 
     @PostMapping("/details")
-    public  ResponseEntity setBookingDetail(Principal principal){
+    public ResponseEntity setBookingDetail(Principal principal) {
         return bookingService.booking(principal.getName());
     }
 
     @GetMapping("/details")
-    public  ResponseEntity<BookingDetail> getBookingDetail(Principal principal){
+    public ResponseEntity<BookingDetail> getBookingDetail(Principal principal) {
         return bookingService.getBookingDetail(principal.getName());
     }
 

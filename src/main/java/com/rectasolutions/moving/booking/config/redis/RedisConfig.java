@@ -29,24 +29,16 @@ public class RedisConfig {
     private int port;
 
 
-    RedisSerializer<String> redisSerializer = new StringRedisSerializer();
-    Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
-        //redisStandaloneConfiguration.setDatabase(0);
         redisStandaloneConfiguration.setPassword(RedisPassword.of(password));
-
         JedisClientConfiguration.JedisClientConfigurationBuilder jedisClientConfiguration = JedisClientConfiguration.builder();
         jedisClientConfiguration.connectTimeout(Duration.ofSeconds(60));// 60s connection timeout
-
-        JedisConnectionFactory jedisConFactory = new JedisConnectionFactory(redisStandaloneConfiguration,
+        return new JedisConnectionFactory(redisStandaloneConfiguration,
                 jedisClientConfiguration.build());
-
-        return jedisConFactory;
     }
 
     @Bean

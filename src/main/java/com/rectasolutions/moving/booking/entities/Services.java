@@ -1,10 +1,10 @@
 package com.rectasolutions.moving.booking.entities;
 
 public enum Services {
-    Booking {
+    BOOKING {
         @Override
         public String toString() {
-            return "booking";
+            return "BOOKING";
         }
     }
 }

@@ -40,7 +40,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
      * Registers the KeycloakAuthenticationProvider with the authentication manager.
      */
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
         KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
         keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
         auth.authenticationProvider(keycloakAuthenticationProvider);
@@ -56,7 +56,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public KeycloakConfigResolver KeycloakConfigResolver() {
+    public KeycloakConfigResolver keycloakConfigResolver() {
         return new KeycloakSpringBootConfigResolver();
     }
 
@@ -64,10 +64,10 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/api/v1/booking/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/api/v1/BOOKING/logout"))
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/booking*").hasRole("RECTA_USER")
+                .antMatchers("/api/v1/BOOKING*").hasRole("RECTA_USER")
                 .anyRequest().permitAll().and().csrf()
                 .disable()
         //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())

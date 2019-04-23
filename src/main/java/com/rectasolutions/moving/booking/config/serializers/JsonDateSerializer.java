@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class JsonDateSerializer extends JsonSerializer <LocalDateTime>{
+public class JsonDateSerializer extends JsonSerializer<LocalDateTime> {
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
     @Override
     public void serialize(LocalDateTime date, JsonGenerator generator, SerializerProvider arg2)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         final String dateString = date.format(this.formatter);
         generator.writeString(dateString);
     }

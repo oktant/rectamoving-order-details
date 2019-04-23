@@ -1,8 +1,6 @@
 package com.rectasolutions.moving.booking.entities;
 
 
-//import org.springframework.data.redis.core.RedisHash;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -148,6 +146,7 @@ public class BookingDetail implements Serializable {
     public void setPrice(String price) {
         this.price = price;
     }
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime getPickUpTime() {
         return pickUpTime;

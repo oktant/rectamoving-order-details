@@ -10,20 +10,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedisService {
     @Autowired
-    RedisTemplate<String,Object> redisTemplate;
+    RedisTemplate<String, Object> redisTemplate;
     @Value("${redisCacheKeyPrefix}")
     private String prefix;
 
-    public void save(String username, BookingDetail bookingDetail,Services service){
-        String cacheKey=prefix+service+"_"+username;
+    public void save(String username, BookingDetail bookingDetail, Services service) {
+        String cacheKey = prefix + service + "_" + username;
         redisTemplate.opsForValue().set(cacheKey, bookingDetail);
     }
-    public <T> T get(String username,Services service){
-        String cacheKey=prefix+service+"_"+username;
-        return (T)redisTemplate.opsForValue().get(cacheKey);
+
+    public <T> T get(String username, Services service) {
+        String cacheKey = prefix + service + "_" + username;
+        return (T) redisTemplate.opsForValue().get(cacheKey);
     }
-    public void invalidate(String username,Services service){
-        String cacheKey=prefix+service+"_"+username;
+
+    public void invalidate(String username, Services service) {
+        String cacheKey = prefix + service + "_" + username;
         redisTemplate.delete(cacheKey);
     }
 }

@@ -2,10 +2,11 @@ package com.rectasolutions.moving.booking.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "vehicle_category")
-public class VehicleCategory {
+public class VehicleCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")

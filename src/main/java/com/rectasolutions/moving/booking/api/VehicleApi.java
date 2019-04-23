@@ -13,19 +13,18 @@ public class VehicleApi {
 
     private RestTemplate restTemplate;
 
-    public VehicleApi (){
-        restTemplate =new RestTemplate();
+    public VehicleApi() {
+        restTemplate = new RestTemplate();
     }
 
     public VehicleCategory getVehicleCategoryByDistance(double distance) {
-        String path = vehicleApiPath+"/categories/distance/"+distance;
-        VehicleCategory vehicleCategory = restTemplate.getForObject(path,VehicleCategory.class);
-        return vehicleCategory;
+        String path = vehicleApiPath + "/categories/distance/" + distance;
+        return restTemplate.getForObject(path, VehicleCategory.class);
     }
-    public VehicleCategory getVehicleCategoryByPayload(double distance,double payload){
-        String path = vehicleApiPath+"/categories/distance/"+distance+"/payload/"+payload;
-        VehicleCategory vehicleCategory = restTemplate.getForObject(path,VehicleCategory.class);
-        return vehicleCategory;
+
+    public VehicleCategory getVehicleCategoryByPayload(double distance, double payload) {
+        String path = vehicleApiPath + "/categories/distance/" + distance + "/payload/" + payload;
+        return restTemplate.getForObject(path, VehicleCategory.class);
     }
 
 
