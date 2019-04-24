@@ -73,12 +73,10 @@ public class BookingService {
     }
 
     public ResponseEntity<BookingDetail> getBookingDetail(String username) {
-        try {
             BookingDetail book = redisService.get(username, Services.BOOKING);
+            if (book==null)
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
             return new ResponseEntity(book, HttpStatus.OK);
-        } catch (Exception exp) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
     }
 
 }

@@ -36,7 +36,7 @@ public class BookingServiceTest {
     BookingService bookingService;
 
     @Before
-    public void getBookingDetailRequest(){
+    public void getBookingDetailRequest() {
         bookingDetail.setVolume(120.20);
         bookingDetail.setDeliveryTime("100");
         bookingDetail.setGoodDescriptions("Fruits");
@@ -47,39 +47,39 @@ public class BookingServiceTest {
     }
 
     @Test
-    public void setMainInfoTest(){
-        when(redisService.get("testuser",Services.BOOKING)).thenReturn(new BookingDetail());
-        assertEquals("Was not correct",120.20,bookingService.setMainInfo(bookingDetail,"testuser").getVolume(),0);
-        assertEquals("100",bookingService.setMainInfo(bookingDetail,"testuser").getDeliveryTime());
-        assertEquals("Fruits",bookingService.setMainInfo(bookingDetail,"testuser").getGoodDescriptions());
-        assertEquals("",bookingService.setMainInfo(bookingDetail,"testuser").getPrice());
+    public void setMainInfoTest() {
+        when(redisService.get("testuser", Services.BOOKING)).thenReturn(new BookingDetail());
+        assertEquals("Was not correct", 120.20, bookingService.setMainInfo(bookingDetail, "testuser").getVolume(), 0);
+        assertEquals("100", bookingService.setMainInfo(bookingDetail, "testuser").getDeliveryTime());
+        assertEquals("Fruits", bookingService.setMainInfo(bookingDetail, "testuser").getGoodDescriptions());
+        assertEquals("", bookingService.setMainInfo(bookingDetail, "testuser").getPrice());
 
     }
 
     @Test
     public void setCustomerDetailsTest() {
-        when(redisService.get("testuser",Services.BOOKING)).thenReturn(new BookingDetail());
-        assertEquals(HttpStatus.OK,bookingService.setCustomerDetails(customerDetail,"testuser").getStatusCode());
-        assertNotEquals(HttpStatus.OK,bookingService.setCustomerDetails(customerDetail,"wrongUser").getStatusCode());
+        when(redisService.get("testuser", Services.BOOKING)).thenReturn(new BookingDetail());
+        assertEquals(HttpStatus.OK, bookingService.setCustomerDetails(customerDetail, "testuser").getStatusCode());
+        assertNotEquals(HttpStatus.OK, bookingService.setCustomerDetails(customerDetail, "wrongUser").getStatusCode());
     }
 
     @Test
     public void bookingTest() {
-        when(redisService.get("testuser",Services.BOOKING)).thenReturn(new BookingDetail());
-        assertEquals(HttpStatus.OK,bookingService.booking("testuser").getStatusCode());
-        assertNotEquals(HttpStatus.OK,bookingService.booking("wrongUser").getStatusCode());
+        when(redisService.get("testuser", Services.BOOKING)).thenReturn(new BookingDetail());
+        assertEquals(HttpStatus.OK, bookingService.booking("testuser").getStatusCode());
+        assertNotEquals(HttpStatus.OK, bookingService.booking("wrongUser").getStatusCode());
     }
 
     @Test
     public void getBookingDetailTest() {
-        when(redisService.get("testuser",Services.BOOKING)).thenReturn(bookingDetail);
-        assertEquals(HttpStatus.OK,bookingService.getBookingDetail("testuser").getStatusCode());
-        assertNotEquals(HttpStatus.OK,bookingService.getBookingDetail("wrongUser").getStatusCode());
+        when(redisService.get("testuser", Services.BOOKING)).thenReturn(bookingDetail);
+        assertEquals(HttpStatus.OK, bookingService.getBookingDetail("testuser").getStatusCode());
+        assertNotEquals(HttpStatus.OK, bookingService.getBookingDetail("wrongUser").getStatusCode());
 
-        assertEquals("Was not correct",120.20,bookingService.getBookingDetail("testuser").getBody().getVolume(),0);
-        assertEquals("100",bookingService.getBookingDetail("testuser").getBody().getDeliveryTime());
-        assertEquals("Fruits",bookingService.getBookingDetail("testuser").getBody().getGoodDescriptions());
-        assertEquals("10$",bookingService.getBookingDetail("testuser").getBody().getPrice());
+        assertEquals("Was not correct", 120.20, bookingService.getBookingDetail("testuser").getBody().getVolume(), 0);
+        assertEquals("100", bookingService.getBookingDetail("testuser").getBody().getDeliveryTime());
+        assertEquals("Fruits", bookingService.getBookingDetail("testuser").getBody().getGoodDescriptions());
+        assertEquals("10$", bookingService.getBookingDetail("testuser").getBody().getPrice());
     }
 }
 
