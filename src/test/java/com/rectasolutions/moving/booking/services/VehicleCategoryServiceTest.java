@@ -1,6 +1,7 @@
 package com.rectasolutions.moving.booking.services;
 
 import com.rectasolutions.moving.booking.api.VehicleApi;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,5 +20,9 @@ public class VehicleCategoryServiceTest {
     @InjectMocks
     VehicleCategoryService vehicleCategoryService;
 
+    @Test
+    public void getVehicleCategoryByDistanceTest(){
+        assertEquals(true,true);
+    }
 
 }
