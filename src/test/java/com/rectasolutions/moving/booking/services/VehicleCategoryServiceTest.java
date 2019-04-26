@@ -20,6 +20,8 @@ public class VehicleCategoryServiceTest {
     VehicleCategory vehicleCategoryBike = new VehicleCategory();
     VehicleCategory vehicleCategoryCar = new VehicleCategory();
 
+
+
     @Mock
     RedisService redisService;
     @Mock
@@ -35,6 +37,7 @@ public class VehicleCategoryServiceTest {
         vehicleCategoryBike.setDeliveryDistance(25.55);
         vehicleCategoryBike.setPayload(5);
         vehicleCategoryBike.setVolume(10.55);
+
     }
     @Before
     public void getVehicleCategoryCar() {
@@ -52,21 +55,25 @@ public class VehicleCategoryServiceTest {
         when(vehicleApi.getVehicleCategoryByDistance(10)).thenReturn(vehicleCategoryBike);
         when(vehicleApi.getVehicleCategoryByDistance(40.55)).thenReturn(vehicleCategoryCar);
         when(vehicleApi.getVehicleCategoryByDistance(60)).thenReturn(new VehicleCategory());
-        assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(10), "testuser").getStatusCode());
+
+        BookingDetail detailDistance = new BookingDetail();
+        detailDistance.setDistance(10);
+
+        assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getStatusCode());
         assertEquals("Was not correct", 25.55,
-                vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(10), "testuser").getBody().getDeliveryDistance(), 0);
+                vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getDeliveryDistance(), 0);
         assertEquals(1,
-                vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(10), "testuser").getBody().getId());
+                vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getId());
 
-        assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(40.55), "testuser").getStatusCode());
+        assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getStatusCode());
         assertEquals("Was not correct", 50.45,
-                vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(40.55), "testuser").getBody().getDeliveryDistance(), 0);
+                vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getDeliveryDistance(), 0);
         assertEquals(2,
-                vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(40.55), "testuser").getBody().getId());
+                vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getId());
 
 
-        assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(60), "testuser").getStatusCode());
-        assertEquals(0, vehicleCategoryService.getVehicleCategoryByDistance(new BookingDetail(60), "testuser").getBody().getId());
+        assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getStatusCode());
+        assertEquals(0, vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getId());
 
     }
 
@@ -79,7 +86,9 @@ public class VehicleCategoryServiceTest {
         when(vehicleApi.getVehicleCategoryByPayload(60,3.2)).thenReturn(new VehicleCategory());
         when(vehicleApi.getVehicleCategoryByPayload(10,20)).thenReturn(new VehicleCategory());
 
-        when(redisService.get("userWithDistance10",Services.BOOKING)).thenReturn(new BookingDetail(10));
+        BookingDetail detailPayload = new BookingDetail();
+        detailPayload.setDistance(10);
+        when(redisService.get("userWithDistance10",Services.BOOKING)).thenReturn(detailPayload);
         assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByPayload("userWithDistance10",3.5).getStatusCode());
 
         assertEquals("Was not correct", 25.55,
@@ -92,15 +101,17 @@ public class VehicleCategoryServiceTest {
                 vehicleCategoryService.getVehicleCategoryByPayload("userWithDistance10",20).getBody().getDeliveryDistance(), 0);
 
 
+        detailPayload.setDistance(30);
 
-        when(redisService.get("userWithDistance30",Services.BOOKING)).thenReturn(new BookingDetail(30));
+        when(redisService.get("userWithDistance30",Services.BOOKING)).thenReturn(detailPayload);
 
         assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByPayload("userWithDistance30",3.2).getStatusCode());
 
         assertEquals("Was not correct", 50.45,
                 vehicleCategoryService.getVehicleCategoryByPayload("userWithDistance30",3.2).getBody().getDeliveryDistance(), 0);
 
-        when(redisService.get("userWithDistance60",Services.BOOKING)).thenReturn(new BookingDetail(60));
+        detailPayload.setDistance(60);
+        when(redisService.get("userWithDistance60",Services.BOOKING)).thenReturn(detailPayload);
 
         assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByPayload("userWithDistance60",3.2).getStatusCode());
 

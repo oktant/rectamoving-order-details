@@ -67,7 +67,7 @@ public class BookingDetail implements Serializable {
     @NotNull
     private String price;
 
-    public BookingDetail() {
+/*    public BookingDetail() {
     }
 
     public BookingDetail(double distance) {
@@ -77,7 +77,7 @@ public class BookingDetail implements Serializable {
     public BookingDetail(double distance,double payload) {
         this.distance = distance;
         this.payload = payload;
-    }
+    }*/
 
     public Location getPickUp() {
         return pickUp;
