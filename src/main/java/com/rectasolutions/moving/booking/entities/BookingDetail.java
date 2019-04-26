@@ -70,11 +70,11 @@ public class BookingDetail implements Serializable {
     public BookingDetail() {
     }
 
-    public BookingDetail(@NotNull double distance) {
+    public BookingDetail(double distance) {
         this.distance = distance;
     }
 
-    public BookingDetail(@NotNull double distance, @NotNull double payload) {
+    public BookingDetail(double distance,double payload) {
         this.distance = distance;
         this.payload = payload;
     }
