@@ -65,6 +65,7 @@ public class VehicleCategoryServiceTest {
         assertEquals(1,
                 vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getId());
 
+        detailDistance.setDistance(40.55);
         assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getStatusCode());
         assertEquals("Was not correct", 50.45,
                 vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getDeliveryDistance(), 0);
@@ -72,6 +73,7 @@ public class VehicleCategoryServiceTest {
                 vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getId());
 
 
+        detailDistance.setDistance(60);
         assertEquals(HttpStatus.OK, vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getStatusCode());
         assertEquals(0, vehicleCategoryService.getVehicleCategoryByDistance(detailDistance, "testuser").getBody().getId());
 
