@@ -36,10 +36,9 @@ public class VehicleCategoryService {
         if (vehicleCategory == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else {
-            ResponseEntity<VehicleCategory> response = new ResponseEntity<>(vehicleCategory, HttpStatus.OK);
-            bookingDetail.setVehicleCategory(response.getBody());
+            bookingDetail.setVehicleCategory(vehicleCategory);
             redisService.save(username, bookingDetail, Services.BOOKING);
-            return response;
+            return new ResponseEntity<>(vehicleCategory, HttpStatus.OK);
         }
     }
 }

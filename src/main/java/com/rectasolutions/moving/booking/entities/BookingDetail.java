@@ -67,6 +67,18 @@ public class BookingDetail implements Serializable {
     @NotNull
     private String price;
 
+    public BookingDetail() {
+    }
+
+    public BookingDetail(@NotNull double distance) {
+        this.distance = distance;
+    }
+
+    public BookingDetail(@NotNull double distance, @NotNull double payload) {
+        this.distance = distance;
+        this.payload = payload;
+    }
+
     public Location getPickUp() {
         return pickUp;
     }
@@ -146,6 +158,7 @@ public class BookingDetail implements Serializable {
     public void setPrice(String price) {
         this.price = price;
     }
+
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime getPickUpTime() {
