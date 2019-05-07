@@ -23,7 +23,7 @@ public class BookingController {
 
     //FOR SIGN IN KEYCLOAK
     @GetMapping
-    public String helloWorld(String text, Principal p) {
+    public String helloWorld(Principal p) {
         return "Hello" + p.getName();
     }
 
