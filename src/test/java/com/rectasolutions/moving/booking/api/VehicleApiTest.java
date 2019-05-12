@@ -34,14 +34,12 @@ public class VehicleApiTest {
 
     @Test
     public void getVehicleCategoryByDistanceTest(){
-        when(restTemplate.getForObject("http://localhost:8090/api/v1/vehicle/categories/distance/5", VehicleCategory.class)).thenReturn(vehicleCategory);
         when(vehicleApi.getVehicleCategoryByDistance(5)).thenReturn(vehicleCategory);
         VehicleCategory expectedCategory = vehicleApi.getVehicleCategoryByDistance(5);
         assertEquals(expectedCategory,vehicleCategory);
     }
     @Test
     public void getVehicleCategoryByPayloadTest(){
-        when(restTemplate.getForObject("http://localhost:8090/api/v1/vehicle/categories/distance/5/payload/5", VehicleCategory.class)).thenReturn(vehicleCategory);
         when(vehicleApi.getVehicleCategoryByPayload(5,5)).thenReturn(vehicleCategory);
         VehicleCategory expectedCategory = vehicleApi.getVehicleCategoryByPayload(5,5);
         assertEquals(expectedCategory,vehicleCategory);
