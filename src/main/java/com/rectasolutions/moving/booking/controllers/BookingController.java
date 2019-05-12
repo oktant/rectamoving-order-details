@@ -58,6 +58,4 @@ public class BookingController {
     public ResponseEntity<BookingDetail> getBookingDetail(Principal principal) {
         return bookingService.getBookingDetail(principal.getName());
     }
-
-
 }
