@@ -15,9 +15,6 @@ public class RedisService {
     @Value("${redisCacheKeyPrefix}")
     private String prefix;
 
-   /* public RedisService(RedisTemplate<String, Object> redisTemplate){
-        this.redisTemplate=redisTemplate;
-    }*/
     public void save(String username, BookingDetail bookingDetail, Services service) {
         String cacheKey = prefix + service + "_" + username;
         redisTemplate.opsForValue().set(cacheKey, bookingDetail);
