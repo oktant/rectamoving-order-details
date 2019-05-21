@@ -2,7 +2,6 @@ package com.rectasolutions.moving.booking.controllers;
 
 import com.rectasolutions.moving.booking.entities.BookingDetail;
 import com.rectasolutions.moving.booking.entities.CustomerDetail;
-import com.rectasolutions.moving.booking.entities.VehicleCategory;
 import com.rectasolutions.moving.booking.services.BookingService;
 import com.rectasolutions.moving.booking.services.VehicleCategoryService;
 import org.junit.Before;
@@ -14,11 +13,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import java.security.Principal;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookingControllerTest {
@@ -37,12 +35,7 @@ public class BookingControllerTest {
     private ResponseEntity response = new ResponseEntity(HttpStatus.OK);
     @Before
     public void setUp(){
-        principal1= new Principal() {
-            @Override
-            public String getName() {
-                return "aaa";
-            }
-        };
+        principal1= () -> "aaa";
         bookingDetail.setVolume(120.20);
         bookingDetail.setDeliveryTime("100");
         bookingDetail.setGoodDescriptions("Fruits");
