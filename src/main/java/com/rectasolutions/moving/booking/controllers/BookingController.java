@@ -24,7 +24,7 @@ public class BookingController {
     //FOR SIGN IN KEYCLOAK
     @GetMapping
     public String helloWorld(Principal p) {
-        return "Hello" + p.getName();
+        return "Hello " + p.getName();
     }
 
     @PostMapping("/vehicles/categories/distances")
@@ -51,6 +51,7 @@ public class BookingController {
 
     @PostMapping("/details")
     public ResponseEntity setBookingDetail(Principal principal) {
+
         return bookingService.booking(principal.getName());
     }
 
