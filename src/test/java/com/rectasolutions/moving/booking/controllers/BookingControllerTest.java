@@ -47,7 +47,7 @@ public class BookingControllerTest {
 
     @Test
     public void helloWorld(){
-        assertEquals(bookingController.helloWorld(principal1),"Hello aaa");
+        assertEquals("Hello aaa",bookingController.helloWorld(principal1));
     }
 
     @Test
